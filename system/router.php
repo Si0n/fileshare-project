@@ -1,7 +1,8 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: sion
- * Date: 04.03.2017
- * Time: 17:17
- */
+$app->get('/', function ($request, $response, $args) {
+    $query = $this->db->query("SELECT * FROM routes WHERE 1");
+
+
+
+    return $response->write("Hello, " . $args['name']);
+});

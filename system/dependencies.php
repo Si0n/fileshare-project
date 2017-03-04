@@ -1,7 +1,17 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: sion
- * Date: 04.03.2017
- * Time: 17:24
- */
+$container = $app->getContainer();
+//logging
+$container['logger'] = function($c) {
+    $logger = new \Monolog\Logger('my_logger');
+    $file_handler = new \Monolog\Handler\StreamHandler("../logs/app.log");
+    $logger->pushHandler($file_handler);
+    return $logger;
+};
+$container['db'] = function ($c) {
+    $db = $c['settings']['db'];
+    $pdo = new PDO("mysqli:host=" . $db['host'] . ";dbname=" . $db['dbname'],
+        $db['user'], $db['pass']);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+    return $pdo;
+};
