@@ -1,8 +1,17 @@
 <?php
+//home
 $app->get('/', function ($request, $response, $args) {
-    $query = $this->db->query("SELECT * FROM routes WHERE 1");
-
-
-
-    return $response->write("Hello, " . $args['name']);
+    $x = $this->view;
+});
+//upload
+$app->get('/upload', function ($request, $response, $args) {
+    $x = $this->view;
+});
+//files overview
+$app->get('/files', function ($request, $response, $args) {
+    $x = $this->view;
+});
+//file overview
+$app->get('/files/{file_id}', function ($request, $response, $args) {
+    $x = $this->view;
 });
