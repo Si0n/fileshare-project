@@ -1,0 +1,93 @@
+.dd-wrap {
+    border: 3px dashed #0069AA;
+    background: #ECF0F1;
+    height: 200px;
+    width: 50%;
+    padding: 60px 10px;
+}
+#content {
+    max-width: 1040px;
+    margin: 0 auto;
+}
+.dd-wrap .dd-text {
+    color: #0069AA;
+    font-size: 2em;
+}
+
+.progressBar {
+    border: 1px solid #7FB3D4;
+    border-radius: 3px;
+    overflow: hidden;
+    margin: 0px 10px;
+}
+
+.progressBar div {
+    color: #fff;
+    text-align: right;
+    line-height: 22px;
+    background-color: #0069AA;
+    border-radius: 3px;
+    padding: 4px 6px;
+}
+
+.statusbar {
+    min-height: 25px;
+    padding: 10px 20px 20px;
+    vertical-align: top;
+}
+
+.statusbar:nth-child(even) {
+    background: #ECF0F1;
+}
+
+.filename {
+    display: inline-block;
+}
+
+.filesize {
+    display: inline-block;
+    color: #0069AA;
+    padding-left: 20px;
+}
+
+.abort {
+    background-color: #A8352F;
+    border-radius: 4px;
+    display: inline-block;
+    color: #fff;
+    font-family: arial;
+    font-size: 13px;
+    font-weight: normal;
+    padding: 4px 15px;
+    cursor: pointer;
+    vertical-align: top;
+}
+
+.dd-wrap {
+    position: relative;
+    margin-top: 10%;
+    margin-left: 25%;
+}
+.selectFile {
+    height: 50px;
+    margin: 20px auto;
+    position: relative;
+    width: 200px;
+}
+input[type=file] {
+    display: none;
+}
+.selectFile label, button {
+    background: #fff;
+    color: #EB6A5A;
+    display: inline-block;
+    font-size: 1.2em;
+    line-height: 50px;
+    padding: 0;
+    width: 15em;
+    text-align: center;
+    white-space: nowrap;
+    text-transform: uppercase;
+    font-weight: 400;
+    box-shadow: 0 1px 1px grey;
+}

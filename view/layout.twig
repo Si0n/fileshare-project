@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% for link in document.links %}
+        <link rel="{{ link.rel }}" href="{{ link.href }}">
+    {% endfor %}
+    {% for meta in document.metas %}
+        <meta name="{{ meta.name }}" content="{{ meta.content }}">
+    {% endfor %}
+    <title>{{ document.title }}</title>
+    {% for style in document.styles %}
+        <link rel="stylesheet" href="{{ style }}">
+    {% endfor %}
+</head>
+<body>
+{% include 'body.twig' %}
+<footer>
+    {% for script in document.scripts %}
+        <script type="text/javascript" src="{{ script }}" async=""></script>
+    {% endfor %}
+</footer>
+</body>
+</html>

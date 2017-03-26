@@ -16,7 +16,8 @@ $container['db'] = function ($c) {
 // Twig
 $container['view'] = function ($container) {
     $view = new \Slim\Views\Twig('../view', [
-        'cache' => '../cache'
+        //'cache' => '../cache'
+        'cache' => false
     ]);
 
     // Instantiate and add Slim specific extension
@@ -24,4 +25,15 @@ $container['view'] = function ($container) {
     $view->addExtension(new Slim\Views\TwigExtension($container['router'], $basePath));
 
     return $view;
+};
+//Controllers
+
+//controller File
+$container['App\Controller\File'] = function ($c) use ($app) {
+    return new App\Controller\File($c, $app);
+};
+
+//controller Home
+$container['App\Controller\Home'] = function ($c) use ($app) {
+    return new App\Controller\Home($c, $app);
 };
