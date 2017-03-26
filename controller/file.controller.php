@@ -1,6 +1,10 @@
 <?php
 
 namespace App\Controller;
+use App\Local\File as LocalFile;
+use App\Local\Dir as Dir;
+use App\Model\File as FileModel;
+use App\Security\Password as Password;
 
 class File extends Controller
 {
@@ -9,34 +13,65 @@ class File extends Controller
         $x = 0;
     }
 
-    public function upload($request, $response, $args)
+    private function file(LocalFile $file) {
+
+    }
+
+
+    public function files(array $request, array $args) {
+
+    }
+
+    public function upload($request)
     {
+        $response = [];
+
         $files = $request->getUploadedFiles();
-        if (empty($files['file'])) {
+        if (empty($files)) {
             throw new Exception('Expected a file');
         }
-        $file = $files['file'];
-        if ($file->getError() === UPLOAD_ERR_OK) {
-
-            $uploadFileName = $file->getClientFilename();
-            $filename = $this->generateFileName($uploadFileName);
-            $file->moveTo("/path/to/$uploadFileName");
-        } else {
-            $this->container->{'App\Controller\Home'}->index($request, $response, $args);
+        foreach ($files as $file) {
+            $local_file = $this->uploadFile($file);
+            $model = new FileModel($this->container->db);
+            $file_id = $model->saveFile($local_file)->insert();
+            $local_file->setFileId($file_id);
+            $response[$file->getClientFilename()] = $local_file;
         }
+        return $response;
     }
 
-    private function generateFileName($old_filename)
+    private function uploadFile($file): LocalFile
     {
-        $fileinfo = pathinfo($old_filename);
-        $file_name = md5($old_filename . md5(date()));
-        return "{$file_name}.{$fileinfo['extension']}";
+        if ($file->getError() === UPLOAD_ERR_OK) {
+            $local_file = new LocalFile();
+            $dir = (new Dir($this->container->get('dir')))->makeDirs();
+            $local_file->setOriginalName($file->getClientFilename());
+            $local_file->setLocalPath($dir->getPath());
+            $local_file->setStatus(LocalFile::FILE_STATUS_UPLOADED);
+            $dir->makeDirs();
+            $file->moveTo($dir->getFullPath($local_file));
+
+            /*security*/
+            $password = Password::generatePassword(6);
+            $encrypted = Password::encryptPassword($password);
+            $local_file->setOriginalPassword($password);
+            $local_file->setPassword($encrypted);
+            return $local_file;
+        } else {
+            Throw new Exception("Error while uploading File: {$file->getClientFilename()}, Error: {$file->getError()}");
+        }
+
     }
-    private function getRootPath() {
-        $root = $this->container->get('dir');
-        /*TODO*/
-    }
-    private function validateFile($file) {
+
+
+
+
+
+
+
+
+    private function validateFile($file)
+    {
         //
     }
 }
