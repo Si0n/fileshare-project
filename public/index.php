@@ -11,5 +11,8 @@ require '../config/config.php';
 $app = new Slim\App($config);
 
 require '../system/bootstrap.php';
-
+$container = $app->getContainer();
+$capsule = new Illuminate\Database\Capsule\Manager;
+$capsule->addConnection($container->get('settings')['db']);
+$capsule->bootEloquent();
 $app->run();

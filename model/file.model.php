@@ -1,37 +1,29 @@
 <?php
+
 namespace App\Model;
-use App\Local\File as LocalFile;
-Class File extends Model {
-    private $allowed = ['user_id', 'filename', 'original', 'path', 'date_upload', 'date_modified', 'status', 'password'];
-    private $properties = [];
-    private $prepared = [];
-    public function saveFile(LocalFile $file) {
-        foreach ($file->getProperties($this->allowed) as $column => $value) {
-            $this->properties[$column] = $value;
-        }
-        return $this;
-    }
-    public function insert() {
-        $sql = "INSERT INTO file SET ";
-        foreach ($this->properties as $key => $value) {
-            $this->prepared[] = "`{$key}` = :{$key}";
-        }
-        $sql .= implode(", ", $this->prepared);
-        $stmt = $this->db->prepare($sql);
-        foreach ($this->properties as $key => &$value) {
-            $stmt->bindParam(":{$key}", $value);
-        }
-        $stmt->execute();
-        return $this->db->lastInsertId();
-    }
+use App\Local\File as FileController;
+use Illuminate\Database\Eloquent\Model;
 
-    public function update() {
-
-    }
-
-    public function delete() {
-
-    }
-
-
+class File extends Model
+{
+	protected $table = 'file';
+	protected $primaryKey = 'file_id';
+	protected $fillable = ['*'];
+	/**
+	 * The table associated with the model.
+	 *
+	 * @var string
+	 */
+	/**
+	 * @param FileController $file
+	 */
+	public function setFile(FileController $file) {
+		$this->user_id = $file->getUserId();
+		$this->filename = $file->getFilename();
+		$this->filename_original = $file->getOriginal();
+		$this->description = $file->getDescription();
+		$this->path = $file->getPath();
+		$this->status = $file->getStatus();
+		$this->password = $file->getPassword();
+	}
 }

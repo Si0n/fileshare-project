@@ -5,6 +5,7 @@ $app->get('/', function ($request, $response, $args) use ($app) {
 });
 //upload
 $app->post('/upload', function ($request, $response, $args) use ($app) {
+
     $uploaded_files = $this->{'App\Controller\File'}->upload($request);
     if (empty($uploaded_files)) {
         $this->{'App\Controller\Home'}->index($request, $response, $args);

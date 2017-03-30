@@ -30,12 +30,13 @@ class File extends Controller
         if (empty($files)) {
             throw new Exception('Expected a file');
         }
+		$file_model = new FileModel();
         foreach ($files as $file) {
             $local_file = $this->uploadFile($file);
-            $model = new FileModel($this->container->db);
-            $file_id = $model->saveFile($local_file)->insert();
-            $local_file->setFileId($file_id);
-            $response[$file->getClientFilename()] = $local_file;
+			$file_model->setFile($local_file);
+			$file_model->save();
+            $local_file->setFileId($file_model->file_id);
+            $response[$file_model->file_id] = $local_file;
         }
         return $response;
     }
@@ -44,7 +45,7 @@ class File extends Controller
     {
         if ($file->getError() === UPLOAD_ERR_OK) {
             $local_file = new LocalFile();
-            $dir = (new Dir($this->container->get('dir')))->makeDirs();
+            $dir = (new Dir($this->container['settings']['dir']))->makeDirs();
             $local_file->setOriginalName($file->getClientFilename());
             $local_file->setLocalPath($dir->getPath());
             $local_file->setStatus(LocalFile::FILE_STATUS_UPLOADED);

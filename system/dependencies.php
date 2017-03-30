@@ -7,12 +7,6 @@ $container['logger'] = function($c) {
     $logger->pushHandler($file_handler);
     return $logger;
 };
-//Database
-$container['db'] = function ($c) {
-    $db = $c->get('db_connection');
-    $pdo = new PDO("mysql:host=" . $db['host'] . ";dbname=" . $db['dbname'], $db['user'], $db['pass']);
-    return $pdo;
-};
 // Twig
 $container['view'] = function ($container) {
     $view = new \Slim\Views\Twig('../view', [
