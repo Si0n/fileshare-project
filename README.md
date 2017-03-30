@@ -3,5 +3,5 @@
 
 USED:
 *  SLIM `microframework`
-* TWIG `template engin`
+* TWIG `template engine`
 * Eloquent `ORM`
