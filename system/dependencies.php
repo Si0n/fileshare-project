@@ -22,7 +22,9 @@ $container['view'] = function ($container) {
 };
 //Controllers
 
-//controller File
+$container['directory'] = function ($c)  {
+   return new App\Service\Directory;
+};//controller File
 $container['App\Controller\File'] = function ($c) use ($app) {
     return new App\Controller\File($c, $app);
 };
