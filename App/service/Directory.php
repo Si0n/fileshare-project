@@ -2,13 +2,16 @@
 
 namespace App\Service;
 
-use App\Local\File as LocalFile;
-
-class Dir {
+class Directory {
 	private $path;
 	private $root;
 	private $full_path;
 
+	/**
+	 * Directory constructor.
+	 * @param string $root
+	 * @method define root, getting path
+	 */
 	public function __construct(string $root) {
 		$this->root = $root;
 		$this->path = $this->getFileDir();
@@ -27,8 +30,11 @@ class Dir {
 		return date('Y-m-d');
 	}
 
-	public function getPath() {
-		return $this->path;
+	public function getPath($part = null) {
+		if (empty($part))
+			return $this->path;
+		else
+			return "{$this->path}/{$part}";
 	}
 
 	public function setRoot(string $root) {
@@ -36,13 +42,16 @@ class Dir {
 		return $this;
 	}
 
-	public function getFullPath(LocalFile $file) {
-		return "{$this->full_path}/{$file->getFilename()}";
+	public function getFullPath($directory) {
+		return "{$this->full_path}/{$directory}";
 	}
 
-	public function makeDirs() {
-		$path = $this->path;
-		if (is_string($this->path)) {
+	/**
+	 * @param $path string|array
+	 * @return $this
+	 */
+	public function makeDirs($path) {
+		if (is_string($path)) {
 			$path = explode("/", $path);
 		}
 		if (!is_array($path)) {
@@ -50,7 +59,7 @@ class Dir {
 		}
 		$this->full_path = $this->root;
 		foreach ($path as $dir) {
-			$this->full_path .= "/{$dir}";
+			$this->full_path .= "{$dir}/";
 			if (!is_dir($this->full_path)) {
 				$result = mkdir($this->full_path, 0755); //not recursively mkdir coz want to give exact rights on each dir
 				if (!$result) {

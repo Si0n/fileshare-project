@@ -9,7 +9,7 @@ $container['logger'] = function($c) {
 };
 // Twig
 $container['view'] = function ($container) {
-    $view = new \Slim\Views\Twig('../view', [
+    $view = new \Slim\Views\Twig('../App/view', [
         //'cache' => '../cache'
         'cache' => false
     ]);
@@ -20,16 +20,20 @@ $container['view'] = function ($container) {
 
     return $view;
 };
-//Controllers
-
-$container['directory'] = function ($c)  {
-   return new App\Service\Directory;
-};//controller File
-$container['App\Controller\File'] = function ($c) use ($app) {
-    return new App\Controller\File($c, $app);
+//Services
+$container['password'] = function ($c)  {
+   return new App\Service\Password();
 };
 
-//controller Home
-$container['App\Controller\Home'] = function ($c) use ($app) {
-    return new App\Controller\Home($c, $app);
+$container['upload'] = function ($c)  {
+   return new App\Service\Upload($c);
+};
+
+$container['directory'] = function ($c)  {
+	return new App\Service\Directory($c->get('settings')['file_directory']);
+};
+
+//Email
+$container['mail'] = function ($c)  {
+	return new SimpleMail();
 };
