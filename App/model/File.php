@@ -10,6 +10,7 @@ class File extends Model {
 	protected $table = 'file';
 	protected $primaryKey = 'file_id';
 	protected $fillable = ['*'];
+	protected $guarded = ['original_password'];
 
 
 }

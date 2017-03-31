@@ -31,7 +31,7 @@ class Upload {
 		return $uploaded_files;
 	}
 
-	private function file(UploadedFile $file) :File {
+	private function file(UploadedFile $file):array {
 		if ($file->getError() === UPLOAD_ERR_OK) {
 			$directory = $this->container->get('directory');
 			$directory->makeDirs($directory->getPath());
@@ -49,9 +49,8 @@ class Upload {
 			$password = Password::generatePassword(6);
 			$encrypted_password = Password::encryptPassword($password);
 			$file_model->password = $encrypted_password;
-			$file_model->original_password = $password;
 			$file_model->save();
-			return $file_model;
+			return ['file' => $file_model, 'password' => $password];
 		} else {
 			Throw new Exception("Error while uploading File: {$file->getClientFilename()}, Error: {$file->getError()}");
 		}
