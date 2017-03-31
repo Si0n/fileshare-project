@@ -2,6 +2,7 @@
 >learning SLIM microframework etc
 
 ## USED:
+* PHP 7
 * SLIM `microframework`
 * TWIG `template engine`
 * Eloquent `ORM`
