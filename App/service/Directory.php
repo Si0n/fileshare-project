@@ -45,6 +45,9 @@ class Directory {
 	public function getFullPath($directory) {
 		return "{$this->full_path}/{$directory}";
 	}
+	public function getPathRoot($directory) {
+		return "{$this->root}{$directory}";
+	}
 
 	/**
 	 * @param $path string|array

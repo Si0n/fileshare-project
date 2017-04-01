@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Service\Document;
 use Slim\Container;
 use Slim\Http\Request;
 use Slim\Http\Response;

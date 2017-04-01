@@ -1,0 +1,24 @@
+{% extends 'layout.twig' %}
+{% block body %}
+    <div id="content" class="content wrapper">
+        {% if variable.form %}
+            <form class="file-password" action="{{ variable.form.action }}" method="{{ variable.form.method }}">
+                <p class="title">Enter password</p>
+                <input type="password" placeholder="Password" name="password" autofocus
+                       class="{{ variable.form.state }}"/>
+                <i class="fa fa-key"></i>
+                {% if variable.form.state_code and variable.form.state == 'error' %}
+                    <div class="error-text text-center" role="alert">
+                        {{ variable.form.state_code }}
+                    </div>
+                {% endif %}
+                <button>
+                    <span class="state">Download</span>
+                </button>
+            </form>
+        {% endif %}
+        {% if variable.files %}
+            {% include 'files.twig' %}
+        {% endif %}
+    </div>
+{% endblock body %}

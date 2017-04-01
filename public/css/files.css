@@ -1,0 +1,13 @@
+.file-list {
+    width: 1080px;
+    margin: 0 auto;
+}
+.file-item {
+    background: #fff;
+    width: 300px;
+    height: 400px;
+    padding: 2em;
+}
+.color-blue {
+    color: deepskyblue;
+}

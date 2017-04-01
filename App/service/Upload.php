@@ -21,10 +21,6 @@ class Upload {
 		$uploaded_files = [];
 
 		$files = $request->getUploadedFiles();
-		if (empty($files)) {
-			throw new Exception('Expected a file');
-		}
-
 		foreach ($files as $file) {
 			$uploaded_files[] = $this->file($file);
 		}
@@ -43,6 +39,7 @@ class Upload {
 			$file_model->filename_original = $file->getClientFilename();
 			$file_model->filename = $directory->getPath($generated_filename);
 			$file_model->status = File::FILE_STATUS_UPLOADED;
+			$file_model->size = $file->getSize();
 
 			$file->moveTo($directory->getFullPath($generated_filename));
 			/*security*/
@@ -60,7 +57,7 @@ class Upload {
 		$filename_parts = [];
 		$filename_parts[] = md5($original_filename . md5(date('Y-m-d H:i:s')));
 		$file_info = pathinfo($original_filename);
-		if (!empty($file_info)) {
+		if (!empty($file_info['extension'])) {
 			$filename_parts[] = $file_info['extension'];
 		}
 

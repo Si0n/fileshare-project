@@ -5,22 +5,30 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    {% for link in document.links %}
-        <link rel="{{ link.rel }}" href="{{ link.href }}">
+    <link rel="icon" type="image/png" href="{{ globals.favicon }}">
+    {% for link in globals.styles %}
+        <link rel="stylesheet" href="{{ link }}">
     {% endfor %}
-    {% for meta in document.metas %}
-        <meta name="{{ meta.name }}" content="{{ meta.content }}">
+    {% for style_properties in style %}
+        <link rel="{{ style_properties.rel }}" href="{{ style_properties.href }}" media="{{ style_properties.media }}">
     {% endfor %}
-    <title>{{ document.title }}</title>
-    {% for style in document.styles %}
-        <link rel="stylesheet" href="{{ style }}">
+    {% for link_properties in link %}
+        <link rel="{{ link_properties.rel }}" href="{{ link_properties.href }}">
     {% endfor %}
+    {% for meta_properties in meta %}
+        <meta name="{{ meta_properties.name }}" content="{{ meta_properties.content }}">
+    {% endfor %}
+    <title>{{ title }}</title>
 </head>
 <body>
-{% include 'body.twig' %}
+{% block body %}
+{% endblock %}
 <footer>
-    {% for script in document.scripts %}
-        <script type="text/javascript" src="{{ script }}" async=""></script>
+    {% for script in globals.scripts %}
+        <script type="text/javascript" src="{{ script }}"></script>
+    {% endfor %}
+    {% for script_properties in script %}
+        <script type="text/javascript" src="{{ script_properties.href }}" async=""></script>
     {% endfor %}
 </footer>
 </body>
