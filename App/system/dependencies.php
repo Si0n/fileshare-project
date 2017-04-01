@@ -16,6 +16,9 @@ $container['password'] = function ($c)  {
 $container['upload'] = function ($c)  {
    return new App\Service\Upload($c);
 };
+$container['menu'] = function ($c)  {
+   return new App\Service\Menu($c);
+};
 // Document
 $container['document'] = function ($container) {
 	$twig = new \Slim\Views\Twig('../App/view', [

@@ -57,7 +57,7 @@ body {
 }
 
 
-.file-password {
+.default-form {
     border-radius: 2px 2px 5px 5px;
     padding: 10px 20px 20px 20px;
     width: 90%;
@@ -67,18 +67,18 @@ body {
     padding-bottom: 80px;
     box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.3);
 }
-.file-password.loading button {
+.default-form.loading button {
     max-height: 100%;
     padding-top: 50px;
 }
-.file-password.loading button .spinner {
+.default-form.loading button .spinner {
     opacity: 1;
     top: 40%;
 }
-.file-password.ok button {
+.default-form.ok button {
     background-color: #8bc34a;
 }
-.file-password.ok button .spinner {
+.default-form.ok button .spinner {
     border-radius: 0;
     border-top-color: transparent;
     border-right-color: transparent;
@@ -86,7 +86,7 @@ body {
     animation: none;
     transform: rotateZ(-45deg);
 }
-.file-password input {
+.default-form input {
     display: block;
     padding: 15px 10px;
     margin-bottom: 10px;
@@ -96,7 +96,7 @@ body {
     border-radius: 2px;
     color: #ccc;
 }
-.file-password input + i.fa {
+.default-form input + i.fa {
     color: #fff;
     font-size: 1em;
     position: absolute;
@@ -123,17 +123,17 @@ input.error:focus {
     color: #ff4422;
     border-color: #ff6242;
 }
-.file-password input:focus + i.fa {
+.default-form input:focus + i.fa {
     opacity: 1;
     left: 30px;
     transition: all 0.25s ease-out;
 }
-.file-password a {
+.default-form a {
     font-size: 0.8em;
     color: #2196F3;
     text-decoration: none;
 }
-.file-password .title {
+.default-form .title {
     color: #444;
     font-size: 1.2em;
     font-weight: bold;
@@ -141,7 +141,7 @@ input.error:focus {
     border-bottom: 1px solid #eee;
     padding-bottom: 20px;
 }
-.file-password button {
+.default-form button {
     width: 100%;
     height: 100%;
     padding: 10px 10px;
@@ -160,7 +160,7 @@ input.error:focus {
     transition: all 0.1s ease-out;
     border-bottom-width: 7px;
 }
-.file-password button .spinner {
+.default-form button .spinner {
     display: block;
     width: 40px;
     height: 40px;
@@ -177,12 +177,292 @@ input.error:focus {
     transition: top 0.3s 0.3s ease, opacity 0.3s 0.3s ease, border-radius 0.3s ease;
     box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.2);
 }
-.file-password:not(.loading) button:hover {
+.default-form:not(.loading) button:hover {
     box-shadow: 0px 1px 3px #2196F3;
 }
-.file-password:not(.loading) button:focus {
+.default-form:not(.loading) button:focus {
     border-bottom-width: 4px;
 }
+
+/*main menu*/
+@import url(//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css);
+}
+@import url(http://fonts.googleapis.com/css?family=Titillium+Web:300);
+.main-menu .fa-2x {
+    font-size: 2em;
+}
+.main-menu .fa {
+    position: relative;
+    display: table-cell;
+    width: 60px;
+    height: 36px;
+    text-align: center;
+    vertical-align: middle;
+    font-size:20px;
+}
+
+
+.main-menu:hover,nav.main-menu.expanded {
+    width:250px;
+    overflow:visible;
+}
+
+.main-menu {
+    background:#fbfbfb;
+    border-right:1px solid #e5e5e5;
+    position:fixed;
+    top:0;
+    bottom:0;
+    height:100%;
+    left:0;
+    width:60px;
+    overflow:hidden;
+    -webkit-transition:width .05s linear;
+    transition:width .05s linear;
+    -webkit-transform:translateZ(0) scale(1,1);
+    z-index:1000;
+}
+
+.main-menu>ul {
+    margin:7px 0;
+}
+
+.main-menu li {
+    position:relative;
+    display:block;
+    width:250px;
+}
+
+.main-menu li>a {
+    position:relative;
+    display:table;
+    border-collapse:collapse;
+    border-spacing:0;
+    color:#999;
+    font-family: arial;
+    font-size: 14px;
+    text-decoration:none;
+    -webkit-transform:translateZ(0) scale(1,1);
+    -webkit-transition:all .1s linear;
+    transition:all .1s linear;
+
+}
+
+.main-menu .nav-icon {
+    position:relative;
+    display:table-cell;
+    width:60px;
+    height:36px;
+    text-align:center;
+    vertical-align:middle;
+    font-size:18px;
+}
+
+.main-menu .nav-text {
+    position:relative;
+    display:table-cell;
+    vertical-align:middle;
+    width:190px;
+    font-family: 'Titillium Web', sans-serif;
+}
+
+
+.no-touch .scrollable.hover {
+    overflow-y:hidden;
+}
+
+.no-touch .scrollable.hover:hover {
+    overflow-y:auto;
+    overflow:visible;
+}
+
+a:hover,a:focus {
+    text-decoration:none;
+}
+
+nav {
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    -o-user-select:none;
+    user-select:none;
+}
+
+nav ul,nav li {
+    outline:0;
+    margin:0;
+    padding:0;
+}
+.main-menu li:hover>a,nav.main-menu li.active>a,.dropdown-menu>li>a:hover,.dropdown-menu>li>a:focus,.dropdown-menu>.active>a,.dropdown-menu>.active>a:hover,.dropdown-menu>.active>a:focus,.no-touch .dashboard-page nav.dashboard-menu ul li:hover a,.dashboard-page nav.dashboard-menu ul li.active a {
+    color:#fff;
+    background-color:#5fa2db;
+}
+.area {
+    float: left;
+    background: #e2e2e2;
+    width: 100%;
+    height: 100%;
+}
+@font-face {
+    font-family: 'Titillium Web';
+    font-style: normal;
+    font-weight: 300;
+    src: local('Titillium WebLight'), local('TitilliumWeb-Light'), url(http://themes.googleusercontent.com/static/fonts/titilliumweb/v2/anMUvcNT0H1YN4FII8wpr24bNCNEoFTpS2BTjF6FB5E.woff) format('woff');
+}
+/*Sign in / up FORM*/
+@import url(http://fonts.googleapis.com/css?family=Raleway:400,100,200,300);
+* {
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    color: #666;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #49b5db;
+}
+
+input {
+    font: 16px/26px "Raleway", sans-serif;
+}
+
+body {
+    color: #666;
+    background-color: #f1f2f2;
+    font: 16px/26px "Raleway", sans-serif;
+}
+
+.form-wrap {
+    background-color: #fff;
+    width: 320px;
+    margin: 3em auto;
+    box-shadow: 0px 1px 8px #BEBEBE;
+    -webkit-box-shadow: 0px 1px 8px #BEBEBE;
+    -moz-box-shadow: 0px 1px 8px #BEBEBE;
+}
+
+.form-wrap .tabs {
+    overflow: hidden;
+}
+
+.form-wrap .tabs h3 {
+    float: left;
+    width: 50%;
+}
+
+.form-wrap .tabs h3 a {
+    padding: 0.5em 0;
+    text-align: center;
+    font-weight: 400;
+    background-color: #e6e7e8;
+    display: block;
+    color: #666;
+}
+
+.form-wrap .tabs h3 a.active {
+    background-color: #fff;
+}
+
+.form-wrap .tabs-content {
+    padding: 1.5em;
+}
+
+.form-wrap .tabs-content div[id$="tab-content"] {
+    display: none;
+}
+
+.form-wrap .tabs-content .active {
+    display: block !important;
+}
+
+.form-wrap form .input {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    color: inherit;
+    font-family: inherit;
+    padding: .8em 0 10px .8em;
+    border: 1px solid #CFCFCF;
+    outline: 0;
+    display: inline-block;
+    margin: 0 0 .8em 0;
+    padding-right: 2em;
+    width: 100%;
+}
+
+.form-wrap form .button {
+    width: 100%;
+    padding: .8em 0 10px .8em;
+    background-color: #5fa2db;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    text-transform: uppercase;
+}
+
+.form-wrap form .button:hover {
+    background-color: #65d4db;
+}
+
+.form-wrap form .checkbox {
+    visibility: hidden;
+    padding: 20px;
+    margin: .5em 0 1.5em;
+}
+
+.form-wrap form .checkbox:checked + label:after {
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+    filter: alpha(opacity=100);
+    opacity: 1;
+}
+
+.form-wrap form label[for] {
+    position: relative;
+    padding-left: 20px;
+    cursor: pointer;
+}
+
+.form-wrap form label[for]:before {
+    content: '';
+    position: absolute;
+    border: 1px solid #CFCFCF;
+    width: 17px;
+    height: 17px;
+    top: 0px;
+    left: -14px;
+}
+
+.form-wrap form label[for]:after {
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    filter: alpha(opacity=0);
+    opacity: 0;
+    content: '';
+    position: absolute;
+    width: 9px;
+    height: 5px;
+    background-color: transparent;
+    top: 4px;
+    left: -10px;
+    border: 3px solid #28A55F;
+    border-top: none;
+    border-right: none;
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    -o-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+}
+
+.form-wrap .help-text {
+    margin-top: .6em;
+}
+
+.form-wrap .help-text p {
+    text-align: center;
+    font-size: 14px;
+}
 input.error {
-    border: 1px solid #ff4422;
+    border: 1px solid #ff4422 !important;
 }

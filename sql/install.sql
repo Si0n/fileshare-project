@@ -12,3 +12,17 @@ CREATE TABLE `file` (
   PRIMARY KEY (`file_id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
+
+CREATE TABLE `user` (
+  `user_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `first_name` VARCHAR(75) NOT NULL,
+  `last_name` VARCHAR(75) NOT NULL,
+  `email` VARCHAR(155) NOT NULL,
+  `password` BINARY(60) NOT NULL,
+  `created_at` TIMESTAMP NOT NULL,
+  `updated_at` TIMESTAMP NOT NULL,
+  `telephone` VARCHAR(55) NOT NULL,
+  `status` TINYINT(1) UNSIGNED NOT NULL DEFAULT 1,
+  PRIMARY KEY (`user_id`), UNIQUE INDEX `email_UNIQUE` (`email` ASC))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;

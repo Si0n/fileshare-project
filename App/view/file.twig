@@ -2,7 +2,7 @@
 {% block body %}
     <div id="content" class="content wrapper">
         {% if variable.form %}
-            <form class="file-password" action="{{ variable.form.action }}" method="{{ variable.form.method }}">
+            <form class="default-form" action="{{ variable.form.action }}" method="{{ variable.form.method }}">
                 <p class="title">Enter password</p>
                 <input type="password" placeholder="Password" name="password" autofocus
                        class="{{ variable.form.state }}"/>

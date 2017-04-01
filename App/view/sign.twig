@@ -1,0 +1,36 @@
+{% extends 'layout.twig' %}
+{% block body %}
+    <div class="form-wrap">
+        <div class="tabs">
+            <h3 class="signup-tab tab"><a class="active" href="#signup-tab-content">Sign Up</a></h3>
+            <h3 class="login-tab tab"><a href="#login-tab-content">Login</a></h3>
+        </div><!--.tabs-->
+
+        <div class="tabs-content">
+            <div id="signup-tab-content" class="tab-content active">
+                <form class="signup-form" action="{{ variable.form.sign_up.action }}" method="{{ variable.form.sign_up.method }}">
+                    <input type="hidden" name="type" value="sign-up">
+                    <input type="email" class="input {{ variable.form_errors.sign_up.email.state }}" value="{{ variable.form_data.sign_up.email }}" name="email" autocomplete="off" placeholder="Email">
+                    <input type="text" class="input {{ variable.form_errors.sign_up.name.state }}" value="{{ variable.form_data.sign_up.name }}"  name="name" autocomplete="off" placeholder="Username">
+                    <input type="password" class="input {{ variable.form_errors.sign_up.password.state }}" name="password" autocomplete="off" placeholder="Password">
+                    <input type="submit" class="button" value="Sign Up">
+                </form><!--.login-form-->
+            </div><!--.signup-tab-content-->
+
+            <div id="login-tab-content" class="tab-content">
+                <form class="login-form" action="{{ variable.form.sign_in.action }}" method="{{ variable.form.sign_in.method }}">
+                    <input type="hidden" name="type" value="sign-in">
+                    <input type="text" class="input {{ variable.form_errors.sign_in.login.state }}" value="{{ variable.form_data.sign_in.login }}" name="login" autocomplete="off" placeholder="Email or Username">
+                    <input type="password" class="input {{ variable.form_errors.sign_in.password.state }}" name="password" autocomplete="off" placeholder="Password">
+                    <input type="checkbox" class="checkbox" name="remember" id="remember_me">
+                    <label for="remember_me">Remember me</label>
+
+                    <input type="submit" class="button" value="Login">
+                </form><!--.login-form-->
+                <div class="help-text">
+                    <p><a href="#">Forget your password?</a></p>
+                </div><!--.help-text-->
+            </div><!--.login-tab-content-->
+        </div><!--.tabs-content-->
+    </div><!--.form-wrap-->
+{% endblock body %}

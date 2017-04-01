@@ -1,9 +1,10 @@
 <section class="file-list">
 {% for file in variable.files %}
     <div class="file-item">
-        <h3 class="color-blue">File: {{ file.filename }}</h3>
+        <div class="heading-title">File: <span class="filename color-blue">{{ file.filename }}</span></div>
         <h4>Size: {{ file.size }} kb</h4>
         <p>Password:<span class="password">{{ file.password }}</span></p>
     </div>
 {% endfor %}
+    <div class="clearfix"></div>
 </section>

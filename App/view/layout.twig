@@ -21,6 +21,22 @@
     <title>{{ title }}</title>
 </head>
 <body>
+{% if variable.menu %}
+    <nav class="main-menu">
+        <ul>
+            {% for menu_element in variable.menu %}
+                <li>
+                    <a href="{{ menu_element.href }}">
+                        <i class="fa {{ menu_element.icon }} fa-2x"></i>
+                        <span class="nav-text">
+                            {{ menu_element.name }}
+                        </span>
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    </nav>
+{% endif %}
 {% block body %}
 {% endblock %}
 <footer>
