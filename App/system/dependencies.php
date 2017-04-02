@@ -1,5 +1,11 @@
 <?php
+$app->add(new \RKA\SessionMiddleware(['name' => 'MySessionName']));
+
 $container = $app->getContainer();
+//Session
+$container['session'] = function ()  {
+	return new \RKA\Session();
+};
 //logging
 $container['logger'] = function($c) {
     $logger = new \Monolog\Logger('my_logger');
@@ -15,6 +21,9 @@ $container['password'] = function ($c)  {
 
 $container['upload'] = function ($c)  {
    return new App\Service\Upload($c);
+};
+$container['form'] = function ($c)  {
+   return new App\Service\Form($c);
 };
 $container['menu'] = function ($c)  {
    return new App\Service\Menu($c);

@@ -76,7 +76,7 @@ class File extends Controller {
 		$document->setTemplate("file.twig");
 		$document->render($response);
 	}
-	public function returnFile(Response $response, $file, $filename = null) {
+	private function returnFile(Response $response, $file, $filename = null) {
 		$filename = $filename ?? $file;
 		$response = $response->withHeader('Content-Description', 'File Transfer')
 			->withHeader('Content-Type', 'application/octet-stream')
