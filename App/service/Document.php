@@ -82,14 +82,14 @@ class Document {
 	public function setVariable($variable, $type) {
 		$this->variable[$type] = $variable;
 	}
-	public function render($variables = [], $template = null) {
+	public function render(Response $response, $variables = [], $template = null) {
 		if (!empty($template)) {
 			$this->setTemplate($template);
 		}
 		if (empty($this->template)) {
 			throw new \Exception("Template not defined!");
 		}
-		return $this->view->render($this->template, array_merge($this->getDocumentProperties(), $variables));
+		return $this->view->render($response, $this->template, array_merge($this->getDocumentProperties(), $variables));
 	}
 	public function errorNotFound(Response $response) {
 		return $response

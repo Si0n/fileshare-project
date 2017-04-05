@@ -19,8 +19,6 @@ class Home extends Controller {
 		$document->setVariable($menu->getMenu(), "menu");
 
 		$document->setTemplate("home.twig");
-		$response = $response->write($document->render(["form" => $form->createView()]));
-		return $response;
-
+		$document->render($response);
 	}
 }
