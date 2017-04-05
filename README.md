@@ -7,6 +7,7 @@
 * TWIG `template engine`
 * Eloquent `ORM`
 * SimpleMail `Mailer`
+* RKA Slim Session Middleware `Session handler`
 ## Installation:
 > 1. rename `config/config-dist.php` file to **`config/config.php`**
 > 2. change **`config.php`** credentials and settings

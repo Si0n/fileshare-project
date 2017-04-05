@@ -1,4 +1,9 @@
 <?php
+use Symfony\Component\Form\Forms;
+use Symfony\Bridge\Twig\Extension\FormExtension;
+use Symfony\Bridge\Twig\Form\TwigRenderer;
+use Symfony\Bridge\Twig\Form\TwigRendererEngine;
+
 $app->add(new \RKA\SessionMiddleware(['name' => 'MySessionName']));
 
 $container = $app->getContainer();
@@ -25,9 +30,7 @@ $container['upload'] = function ($c)  {
 $container['form'] = function ($c)  {
    return new App\Service\Form($c);
 };
-$container['menu'] = function ($c)  {
-   return new App\Service\Menu($c);
-};
+
 // Document
 $container['document'] = function ($container) {
 	$twig = new \Slim\Views\Twig('../App/view', [
@@ -37,7 +40,23 @@ $container['document'] = function ($container) {
 	// Instantiate and add Slim specific extension
 	$basePath = rtrim(str_ireplace('index.php', '', $container['request']->getUri()->getBasePath()), '/');
 	$twig->addExtension(new Slim\Views\TwigExtension($container['router'], $basePath));
-	$twig->offsetSet('globals', $container->get('twig_globals'));
+	$twig->addExtension(
+		new FormExtension(new TwigRenderer($formEngine))
+	);
+	$twig->addRuntimeLoader(new \Twig_FactoryRuntimeLoader(array(
+		TwigRenderer::class => function () use ($formEngine) {
+			return new TwigRenderer($formEngine);
+		},
+	)));
+	$twig->addGlobal('globals', $container->get('twig_globals'));
+	return $twig;
+};
+$container['menu'] = function ($c)  {
+	return new App\Service\Menu($c);
+};
+// Document
+$container['document'] = function ($container) {
+	$twig = $container->get('twig');
 	return  new \App\Service\Document($twig);
 };
 
