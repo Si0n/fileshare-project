@@ -1,11 +1,19 @@
 {% extends 'layout.twig' %}
 {% block body %}
     <div class="wrapper">
-        <form action="{{ form.action }}" id="action" method="{{ form.method }}" enctype="multipart/form-data">
-            <div class="file-upload">
-                <input type="file" name="file"/>
-                <i class="fa fa-arrow-up"></i>
+        <div class="flip">
+            <div class="card">
+                <div class="face front">
+                    <form action="{{ form.action }}" id="action" method="{{ form.method }}" class="inline-block"
+                          enctype="multipart/form-data">
+                        <div class="file-upload">
+                            <input type="file" name="file"/>
+                            <i class="fa fa-arrow-up"></i>
+                        </div>
+                    </form>
+                </div>
+                <div class="face back upload-info">Back</div>
             </div>
-        </form>
+        </div>
     </div>
 {% endblock body %}

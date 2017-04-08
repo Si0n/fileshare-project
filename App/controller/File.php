@@ -19,26 +19,23 @@ class File extends Controller {
 	 * @method: can be used to upload not only a single file but also a few files
 	 */
 	public function upload(Request $request, Response $response, $args) {
+		$json = [];
 		$upload = $this->container->get('upload');
-		$document = $this->container->get('document');
 		$files = $upload->files($request);
 		if (empty($files)) {
-			return $response->withStatus(302)->withHeader('Location', '/');
+			$json['error'][] = 'No files given!';
+		} else {
+			$files_info = [];
+			foreach ($files as $file_data) {
+				$files_info[$file_data['file']->file_id] = [
+					'filename' => $file_data['file']->filename_original,
+					'password' => $file_data['password'],
+					'size' => $file_data['file']->size];
+			}
+			$json['files'] = $files_info;
+			$json['success'] = true;
 		}
-		$document->setAsset(["href" => "/js/app.js", "attributes" => ["async" => true]], "script");
-		$document->setAsset(["href" => "/css/files.css", "rel" => "stylesheet"], "style");
-		$document->setAsset("Files edit page", "title");
-		$document->setAsset(["name" => "description", "content" => "You just downloaded files, some files. Here you can edit their settings "], "meta");
-		$files_info = [];
-		foreach ($files as $file_data) {
-			$files_info[$file_data['file']->file_id] = [
-				'filename' => $file_data['file']->filename_original,
-				'password' => $file_data['password'],
-				'size' => $file_data['file']->size];
-		}
-		$document->setVariable($files_info, "files");
-		$document->setTemplate("file.twig");
-		$document->render($response);
+		return $response->withJson($json);
 	}
 
 	public function list(Request $request, Response $response, $args) {
