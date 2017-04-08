@@ -21,6 +21,7 @@ class File extends Controller {
 	public function upload(Request $request, Response $response, $args) {
 		$json = [];
 		$upload = $this->container->get('upload');
+		$session = $this->container->get('session');
 		$files = $upload->files($request);
 		if (empty($files)) {
 			$json['error'][] = 'No files given!';
@@ -30,9 +31,17 @@ class File extends Controller {
 				$files_info[$file_data['file']->file_id] = [
 					'filename' => $file_data['file']->filename_original,
 					'password' => $file_data['password'],
-					'size' => $file_data['file']->size];
+					'size' => $file_data['file']->size,
+					'file_id' => $file_data['file']->file_id];
 			}
 			$json['files'] = $files_info;
+			$session_files = $session->get('files');
+			if (!empty($session_files)) {
+				$session_files = array_merge($session_files, $files_info);
+			} else {
+				$session_files = $files_info;
+			}
+			$session->set('files', $session_files);
 			$json['success'] = true;
 		}
 		return $response->withJson($json);
@@ -45,6 +54,7 @@ class File extends Controller {
 	public function item(Request $request, Response $response, $args) {
 		$document = $this->container->get('document');
 		$directory = $this->container->get('directory');
+		$session = $this->container->get('session');
 
 		$file_id = (int)($args['file_id'] ?? null);
 		$file = \App\Model\File::find($file_id);
@@ -66,6 +76,11 @@ class File extends Controller {
 		} else {
 			$document->setVariable(["action" => $request->getUri()->getPath(), "method" => "POST"], "form");
 		}
+		$files = $session->get('files');
+		if (!empty($files)) {
+			$document->setVariable($files, "files");
+		}
+
 		$document->setAsset(["href" => "/js/app.js", "attributes" => ["async" => true]], "script");
 		$document->setAsset(["href" => "/css/file.css"], "style");
 		$document->setAsset("File inspect page", "title");

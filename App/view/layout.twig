@@ -39,6 +39,24 @@
 {% endif %}
 {% block body %}
 {% endblock %}
+<div class="right-sidebar">
+
+    <div class="uploads-container {{ variable.files ? 'expanded' : '' }}" >
+        <div>
+            <ul id="upload-list">
+
+                {% for file in variable.files %}
+                    <li>
+                        <a href="/files/{{ file.file_id }}">
+                            <span class="file-name">File name : <b>{{ file.filename }}</b></span>
+                            <span class="file-password">Password: <b>{{ file.password }}</b></span>
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
 <footer>
     {% for script in globals.scripts %}
         <script type="text/javascript" src="{{ script }}"></script>

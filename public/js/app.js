@@ -50,23 +50,15 @@
                 var html = ''
                 for (let file_id in data.files) {
                     let file = data.files[file_id];
-                    html += '<div class="file">';
-                    html += '<div class="file-image">'
-                    html += '<div class="image-wrapper">'
-                    html += '<img src="' + file.image + '" title="' + file.filename + '">';
-                    html += '</div>';
-                    html += '</div>';
-                    html += '<div class="file-info">';
-                    html += 'File: ' + file.filename;
-                    html += '<p>File ID : ' + file_id + '</p>';
-                    html += '<p>Password :' + file.password + '</p>';
-                    html += '<p>File size:' + file.size + '</p>';
-                    html += '</div>';
-                    html += '</div>';
+                    html += '<li>';
+                    html += '<a href="/files/' + file.file_id + '">';
+                    html += '<span class="file-name">File name : <b>' +  file.filename + '</b></span>';
+                    html += '<span class="file-password">Password: <b>' +  file.password + '</b></span>';
+                    html += '</a>';
+                    html += '</li>';
                 }
-                console.log(html);
-                $('.upload-info').html(html);
-                $('.card').addClass("flipped");
+                $('#upload-list').append(html);
+                $('.uploads-container').addClass('expanded');
             }
         }
         this.sendUploadedFiles = function (url, data, callback) {
@@ -86,22 +78,3 @@
         }
     }
 }(jQuery)
-
-$('#upload').on('click', function () {
-    var file_data = $('#sortpicture').prop('files')[0];
-    var form_data = new FormData();
-    form_data.append('file', file_data);
-    alert(form_data);
-    $.ajax({
-        url: 'upload.php', // point to server-side PHP script
-        dataType: 'text',  // what to expect back from the PHP script, if anything
-        cache: false,
-        contentType: false,
-        processData: false,
-        data: form_data,
-        type: 'post',
-        success: function (php_script_response) {
-            alert(php_script_response); // display response from the PHP script, if any
-        }
-    });
-});
