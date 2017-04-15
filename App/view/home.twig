@@ -4,10 +4,18 @@
         <form action="{{ form.action }}" id="action" method="{{ form.method }}" class="inline-block"
               enctype="multipart/form-data">
             <div class="file-upload">
-                <input type="file" name="file"/>
+                <input type="file" name="file[]" multiple/>
                 <i class="fa fa-arrow-up"></i>
             </div>
         </form>
     </div>
     </div>
 {% endblock body %}
+{% block file_list %}
+    <div class="container">
+    {% include '/file/file_list.twig' %}
+    </div>
+{% endblock file_list %}
+{% block sidebar_files %}
+    <div id="upload-list"></div>
+{% endblock sidebar_files %}

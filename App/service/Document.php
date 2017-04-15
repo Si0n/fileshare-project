@@ -40,7 +40,7 @@ class Document {
 				}
 			}
 			if ($key === FALSE) {
-				throw new \Exception("Given none of defined properties : " . implode(", ", $defined_properties));
+				throw new \Exception("Given none of defined properties : " . implode(", ", $must_exist_one_of_property));
 			}
 			$this->{$type}[md5($key)] = $asset;
 		} elseif (is_string($asset) && in_array($type, ['title', 'description'])) {

@@ -21,9 +21,12 @@ class Upload {
 		$uploaded_files = [];
 
 		$files = $request->getUploadedFiles();
-		foreach ($files as $file) {
-			$uploaded_files[] = $this->file($file);
+		if (!empty($files['file'])) {
+			foreach ($files['file'] as $file) {
+				$uploaded_files[] = $this->file($file);
+			}
 		}
+
 		return $uploaded_files;
 	}
 

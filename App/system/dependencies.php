@@ -35,9 +35,6 @@ $container['twig'] = function ($container) {
 	$twig->offsetSet('globals', $container->get('twig_globals'));
 	return $twig;
 };
-$container['menu'] = function ($c)  {
-	return new App\Service\Menu($c);
-};
 // Document
 $container['document'] = function ($container) {
 	$twig = $container->get('twig');

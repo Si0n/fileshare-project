@@ -3,7 +3,7 @@
     var _ = new App(), $doc = $(document);
 
 
-    $doc.on("change", 'input[name="file"]', _.handleFileUpload('/upload', _.showFileInfo));
+    $doc.on("change", 'input[name="file[]"]', _.handleFileUpload('/upload', _.showFileInfo));
 
     $doc.on("click", ".tabs a", function (e) {
         e.preventDefault ? e.preventDefault() : e.returnValue = false;
@@ -35,8 +35,9 @@
                     var files = file_input.prop('files');
                     form_data = new FormData();
                     for (var file in files) {
-                        form_data.append('file', files[file]);
+                        form_data.append('file[]', files[file]);
                     }
+                    form_data.append('file', files[file]);
                     that.sendUploadedFiles(url, form_data, callback);
 
                 } else {
